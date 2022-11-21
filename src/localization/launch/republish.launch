@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="SID" default = "20200797"/>
+	<node name="relay_maps" pkg="topic_tools" type="relay" args="map_main map_$(arg SID)" output="screen" />
+	<node name="relay_odom" pkg="topic_tools" type="relay" args="localised_odom odom_$(arg SID)" output="screen" />
+	<node name="relay_path" pkg="topic_tools" type="relay" args="points_done path_$(arg SID)" output="screen" />
+</launch>

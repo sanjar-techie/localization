@@ -1,0 +1,7 @@
+set(eurecarr_vehicle_sim_SETUP_PY_SETUP_MODULE "distutils.core")
+set(eurecarr_vehicle_sim_SETUP_PY_VERSION "0.0.0")
+set(eurecarr_vehicle_sim_SETUP_PY_SCRIPTS "script/simulate_dynamics.py")
+set(eurecarr_vehicle_sim_SETUP_PY_PACKAGES "")
+set(eurecarr_vehicle_sim_SETUP_PY_PACKAGE_DIRS "")
+set(eurecarr_vehicle_sim_SETUP_PY_MODULES "")
+set(eurecarr_vehicle_sim_SETUP_PY_MODULE_DIRS "")

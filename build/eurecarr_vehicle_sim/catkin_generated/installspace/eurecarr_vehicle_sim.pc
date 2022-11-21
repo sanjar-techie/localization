@@ -1,0 +1,8 @@
+prefix=/home/team6/catkin_ws/install
+
+Name: eurecarr_vehicle_sim
+Description: Description of eurecarr_vehicle_sim
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -leurecarr_vehicle_sim
+Requires: geometry_msgs nav_msgs roscpp rospy std_msgs

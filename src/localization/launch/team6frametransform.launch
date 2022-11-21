@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="rate_map" default = "1"/>
+	<arg name="rate_scan" default = "40"/>
+	<!-- Run grid2pc node for map 																								-->
+	<node name="grid2pc_map" pkg="team6pack" type="grid2pc.py" args="$(arg rate_map)" output="screen">
+		<remap from="/map" to="/map_main" /> 					<!-- Input	:	nav_msgs/OccupancyGrid 							-->
+		<remap from="/grid2pc" to="/map_grid2pc" /> 			<!-- Output :	sensor_msgs/PointCloud2 						-->
+	</node>
+
+	<!-- Run scan2pc2grid node for lidar: converts sensor_msgs/LaserScan to sensor_msgs/PointCloud2 to nav_msgs/OccupancyGrid 	-->
+	<node name="scan2pc2grid" pkg="team6pack" type="scan2pc2grid.py" output="screen">
+		<remap from="/scan" to="/scan" /> 						<!-- Input 	:	sensor_msgs/LaserScan 							-->
+		<remap from="/scan2pc" to="/scan2pc" /> 				<!-- Output : 	sensor_msgs/PointCloud2 						-->
+		<remap from="/scan2pc2grid" to="/scan2pc2grid" /> 		<!-- Output :	nav_msgs/OccupancyGrid 							-->
+	</node>
+	 
+	<!-- Run gridfilter node for scan 																							-->
+	<!-- <node name="gridfilter_scan" pkg="team6pack" type="gridfilter.py" output="screen">-->
+	<!-- 	<remap from="/map_in" to="/scan2pc2grid" />-->
+	<!-- 	<remap from="/map_out" to="/scan2pc2grid_filt" />-->
+	<!-- </node>-->
+
+	<!-- Run grid2pc node for scan 																								-->
+	<node name="grid2pc_scan" pkg="team6pack" type="grid2pc.py" args="$(arg rate_scan)" output="screen">
+		<remap from="/map" to="/scan2pc2grid" /> 				<!-- Input	:	nav_msgs/OccupancyGrid 							-->
+		<remap from="/grid2pc" to="/scan_grid2pc" /> 			<!-- Output :	sensor_msgs/PointCloud2 						-->
+	</node>
+
+	<!-- Run localisation node 																									-->
+	<node name="team6localisation" pkg="team6pack" type="team6localisation" output="screen">
+		<remap from="/scan_grid2pc" to="/scan_grid2pc" /> 		<!-- Input  :	nav_msgs/OccupancyGrid 							-->
+		<remap from="/map_grid2pc" to="/map_grid2pc" /> 		<!-- Input  :	nav_msgs/OccupancyGrid 							-->
+		<remap from="/initialpose" to="/initialpose" /> 		<!-- Input  :	geometry_msgs/PoseWithCovarianceStamped 		-->
+		<remap from="/localised_pose" to="/localised_pose" /> 	<!-- Output :	geometry_msgs/PoseWithCovariance 				-->
+		<remap from="/localised_odom" to="/localised_odom" /> 	<!-- Output :	nav_msgs/Odometry 								-->
+		<remap from="/pc_localised" to="/pc_localised" /> 		<!-- Output :	sensor_msgs/PointCloud2 						-->
+	</node>
+</launch>

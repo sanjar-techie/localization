@@ -1,0 +1,11 @@
+<launch>
+
+<!-- Run simple_publisher_node.py -->
+<node name="MinjuHong" pkg="beginner_tutorials" type="simple_publisher_node.py" output="screen">
+</node>
+
+<!-- Run data_processor.py -->
+<node name="talker_listener" pkg="beginner_tutorials" type="data_processor.py" output="screen">
+</node>
+
+</launch>

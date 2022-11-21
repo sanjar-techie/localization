@@ -1,0 +1,11 @@
+<launch>
+
+<!-- Run talker.py -->
+<node name="talker" pkg="beginner_tutorials" type="talker.py" output="screen">
+</node>
+
+<!-- Run tl.py -->
+<node name="talker_listener" pkg="beginner_tutorials" type="tl.py" output="screen">
+</node>
+
+</launch>

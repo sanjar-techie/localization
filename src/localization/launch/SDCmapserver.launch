@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="map" default = "map.yaml"/>
+	<!-- Run Map Server -->
+	<node name="map_server_node" pkg="map_server" type="map_server" args="$(arg map)" output="screen">
+		<remap from="/map" to="/map_20190338" />
+	</node>
+</launch>
