@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="port" default ="/dev/ttyARD"/>
+	<arg name="baud" default ="57600"/>
+	<!-- Run Arduino Relay Node -->
+	<node name="team6arduino_node" pkg="rosserial_python" type="serial_node.py" args="_port:=$(arg port) _baud:=$(arg baud)" output="screen"/>
+</launch>

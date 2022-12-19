@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="main_map" default ="$(find team6pack)/maps/cd_map.yaml"/>
+	<arg name="obstacle_map" default ="$(find team6pack)/maps/cd_map_mask.yaml"/>
+	<arg name="path_map" default ="$(find team6pack)/maps/path_grid.yaml"/>
+	<arg name="topic_main" default ="/map/main"/>
+	<arg name="topic_mask" default ="/map/validpath"/>
+	<arg name="topic_path" default ="/map/truepath"/>
+
+	<!-- Run Map Servers -->
+	<node name="main_map_server" pkg="map_server" type="map_server" args="$(arg main_map)" output="screen">
+		<remap from="/map" to="$(arg topic_main)" />
+	</node>
+	<node name="obstacle_map_server" pkg="map_server" type="map_server" args="$(arg obstacle_map)" output="screen">
+		<remap from="/map" to="$(arg topic_mask)" />
+	</node>
+	<node name="path_map_server" pkg="map_server" type="map_server" args="$(arg path_map)" output="screen">
+		<remap from="/map" to="$(arg topic_path)" />
+	</node>
+</launch>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="base_link_to_imu_link_broadcaster" type="static_transform_publisher" pkg="tf" args="0 0 0 0 0 0 base_link imu_link 100" />
+
+  <node pkg="myahrs_driver" type="myahrs_driver" name="myahrs_driver">
+    <param name="port" value="/dev/ttyIMU" />
+    <param name="baud_rate" value="115200" />
+    <remap from="/imu/data" to="/imu/data/gravity"/> <!-- output -->
+    <remap from="/imu/data_raw" to="/imu/data_raw"/> <!-- output -->
+  </node>
+
+  <node name="imu_filter_node" pkg="imu_filter_madgwick" type="imu_filter_node">
+    <param name="remove_gravity_vector" value="true" />
+    <remap from="/imu/data_raw" to="/imu/data_raw"/> <!-- input -->
+    <remap from="/imu/data" to="/imu/data_filtered"/> <!-- output -->
+  </node>
+</launch>

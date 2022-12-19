@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-	<arg name="map" default = "map.yaml"/>
-	<!-- Run Map Server -->
-	<node name="mslauncher" pkg="map_server" type="map_server" args="$(arg map)" output="screen">
-		<remap from="/map" to="/map_main" />
-		<!--<remap from="/map" to="/map_20226466" />-->
-	</node>
-</launch>

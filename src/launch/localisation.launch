@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="rate_map" default = "1"/>
+	<!-- Run grid2pc node for map-->
+	<node name="grid2pc_map" pkg="team6pack" type="grid2pc.py" args="$(arg rate_map)" output="screen">
+		<remap from="/map" to="/map/main" />
+		<remap from="/grid2pc" to="/map_grid2pc" />
+	</node>
+
+	<!-- Run localisation node -->
+	<node name="localisation_node" pkg="team6pack" type="localisation" output="screen">
+		<remap from="/laserscan" to="/scan" /> 
+		<remap from="/map_pointcloud" to="/map_grid2pc" />
+		<remap from="/initial_pose" to="/initialpose" />
+		<remap from="/odometry_input" to="/odometry/filtered" /> 
+		
+		<remap from="/localisation/pose" to="/localisation/pose" />
+		<remap from="/localisation/pointcloud" to="/localisation/pc" />
+		<remap from="/localisation/score" to="/localisation/score" />
+	</node>
+</launch>

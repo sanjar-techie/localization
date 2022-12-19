@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+  <rosparam command="load" file="$(find team6pack)/cfg/team6ekf.yaml" />
+  
+  <node name="odom_to_base_broadcaster" type="static_transform_publisher" pkg="tf" args="0 0 0 0 0 0 odom base_link 100"/>
+
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/filtered"/>
+  </node>
+
+</launch>
