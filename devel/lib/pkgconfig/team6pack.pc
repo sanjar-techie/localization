@@ -1,8 +1,0 @@
-prefix=/home/team6/catkin_ws/devel
-
-Name: team6pack
-Description: Description of team6pack
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: roscpp rospy std_msgs sensor_msgs laser_geometry message_runtime pcl_conversions pcl_ros ndt_omp
